@@ -1,12 +1,17 @@
 #!/bin/bash
-echo "Insert IP of the client that you want add" && read ipclient
+read name firstname
+read -p "Insert IP of the client that you want add: " ipclient
+
+#echo "Insert IP of the client that you want add" && read ipclient
 mask="/32"
 ipc=$ipclient$mask
 echo $ipc
 echo ""
 
 #Publi Key of the client
-echo "Insert Public Key of the client that you want add" && read pubkey
+
+read -p "Insert Public Key of the client that you want add: " pubkey
+#echo "Insert Public Key of the client that you want add" && read pubkey
 echo ""
 
 #Add wg peer
