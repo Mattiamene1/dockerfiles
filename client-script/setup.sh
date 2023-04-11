@@ -1,11 +1,11 @@
 #!/bin/sh
 cd ~
 # install Wireguard
-apt install figlet
-apt install wireguard
+apt install figlet -y
+apt install wireguard -y
 echo ""
 echo ""
-echo ""
+
 # Create config file
 cd /etc/wireguard/
 
@@ -14,18 +14,15 @@ if [ -s /etc/wireguard/privatekey ]; then
     cat /etc/wireguard/privatekey
 else
     umask 077; wg genkey | tee privatekey | wg pubkey > publickey
-    cat /etc/wireguard/privatekey
 fi
 
 prikeyclient=`cat /etc/wireguard/privatekey`
 ipclient="10.13.13.5"
 host=`echo $ipclient | cut -d . -f 4`
-#echo $prikeyclient - $ipclient - $host
 
 # Building wg0.conf file
 if [ -s /etc/wireguard/wg0.conf ]; then             # The file is not-empty.
     figlet !!! wg0.conf file already exists !!!
-    #cat /etc/wireguard/wg0.conf
 else                                                # The file is empty.
     umask 077; touch -a /etc/wireguard/wg0.conf
 
@@ -48,10 +45,18 @@ else                                                # The file is empty.
     echo "" >> wg0.conf
     echo "# Key connection alive" >> wg0.conf
     echo "PersistentKeepalive = 15" >> wg0.conf
+    echo ""
+    # Enable wg service
+    systemctl start wg-quick@wg0
+    systemctl status wg-quick@wg0
+
+    # Status of wg
+    echo ""
+    wg
+    echo ""
+    ip a show wg0
+
     #cat /etc/wireguard/wg0.conf#
     figlet Client configurated
-
-    #sending public key file to the server
-    scp /etc/wireguard/privatekey root@10.111.0.44:/etc/wireguard/clients/10-13-13-$host
+    
 fi
-
