@@ -26,8 +26,8 @@ systemctl start wg-quick@wg0
 systemctl status wg-quick@wg0
 
 # Test server ping
-
-ping -c 2 10.13.13.1 > /dev/null && echo "peer configured succesfully" || echo "peer NOT configured"
-
-echo "Check the status"
-wg
+echo ""
+sleep 5
+echo "Check the status" && wg
+echo ""
+ping -c 4 10.13.13.1 > /dev/null && echo "peer configured succesfully" || echo "peer NOT configured"

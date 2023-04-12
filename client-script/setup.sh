@@ -3,6 +3,7 @@ cd ~
 # install Wireguard
 apt install figlet -y
 apt install wireguard -y
+apt install curl -y
 echo ""
 echo ""
 
@@ -57,6 +58,6 @@ else                                                # The file is empty.
     ip a show wg0
 
     #cat /etc/wireguard/wg0.conf#
-    figlet Client configurated
-    
+    figlet Client configurated  
+
 fi
