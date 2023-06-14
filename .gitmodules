@@ -1,0 +1,3 @@
+[submodule "stage-unitn-meneghin"]
+	path = stage-unitn-meneghin
+	url = https://github.com/monokee-stage/stage-unitn-meneghin.git
