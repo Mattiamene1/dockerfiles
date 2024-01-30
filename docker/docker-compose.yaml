@@ -11,15 +11,15 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - SERVERURL=auto #optional
-      - SERVERPORT=12345 #optional
+      - SERVERPORT=51820 #optional
       - PEERS=3 #optional you can specify the name PEERS=pper1,peer2,peer3
       - PEERDNS=auto #optional point at dns server running on your wireguard server
       - ALLOWEDIPS=0.0.0.0/0 #optional
     volumes:
-      - /etc/wireguard:/config
+      - /opt/wireguard-server/config:/config
       - /lib/modules:/lib/modules #optional
     ports:
-      - 12345:51820/udp #exposing the port
+      - 51820:51820/udp #exposing the port
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
